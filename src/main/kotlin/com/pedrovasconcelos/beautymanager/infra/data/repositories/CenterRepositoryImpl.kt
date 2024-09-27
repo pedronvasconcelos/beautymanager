@@ -1,4 +1,3 @@
-// CenterRepositoryImpl.kt
 package com.pedrovasconcelos.beautymanager.infra.data.repositories
 
 import CenterDocument
@@ -30,9 +29,7 @@ class CenterRepositoryImpl(
         )
 
     override fun getCenter(id: UUID): Either<RepositoryError, Center> =
-        centerMongoRepository.findById(id).orElse(null)?.let { document ->
-            document.toDomain().right()
-        } ?: RepositoryError().left()
+        centerMongoRepository.findById(id).orElse(null)?.toDomain()?.right() ?: RepositoryError().left()
 }
 
 

@@ -1,6 +1,8 @@
 package com.pedrovasconcelos.beautymanager.domain.centers
 
 import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.Either.Right
 import arrow.core.left
 import arrow.core.right
 import com.pedrovasconcelos.beautymanager.domain.shared.BaseError
@@ -11,6 +13,7 @@ data class Center (val id : UUID,
                    val active : Boolean,
                    val name : String,
                    val email : String,
+                   val employees : List<Employee> = emptyList()
     )
 
 fun createCenter(name: String, email: String): Either<BaseError, Center> {
@@ -25,3 +28,14 @@ fun createCenter(name: String, email: String): Either<BaseError, Center> {
         ).right()
     }
 }
+
+
+
+
+fun Center.addEmployee(employee: Employee): Either<BaseError, Center> =
+    if (employees.none { it.name == employee.name })
+        Right(copy(employees = employees + employee))
+    else Left(
+        ValidationError("Employee already exists")
+    )
+

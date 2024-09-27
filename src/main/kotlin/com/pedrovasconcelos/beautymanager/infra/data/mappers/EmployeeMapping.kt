@@ -11,6 +11,7 @@ fun Center.toDocument(): CenterDocument =
         name = name,
         email = email,
         active = active,
+        employees = employees.map { it.toDocument() }
     )
 
 fun CenterDocument.toDomain(): Center =
@@ -19,6 +20,7 @@ fun CenterDocument.toDomain(): Center =
         name = name,
         email = email,
         active = active,
+        employees = employees.map { it.toDomain() }
     )
 
 fun Employee.toDocument(): EmployeeEmbeddedDocument =

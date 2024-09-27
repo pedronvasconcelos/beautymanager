@@ -9,7 +9,7 @@ data class CenterDocument(
     val name: String,
     val active: Boolean,
     val email: String,
-    val employees: List<UUID> = emptyList()
+    val employees: List<EmployeeEmbeddedDocument> = emptyList()
 )
 
 

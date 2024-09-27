@@ -1,6 +1,7 @@
 package com.pedrovasconcelos.beautymanager.domain.centers
 
 import arrow.core.Either
+import com.pedrovasconcelos.beautymanager.domain.shared.BaseError
 
 import java.util.UUID
 
@@ -23,10 +24,7 @@ fun createEmployee(name: String, role: String, centerId: UUID): Either<EmployeeE
 
 
 
-sealed class EmployeeError {
-    object EmployeeNotFound : EmployeeError()
-    object EmployeeAlreadyExists : EmployeeError()
-    object EmployeeNotActive : EmployeeError()
+sealed class EmployeeError : BaseError() {
     object EmployeeNotValid : EmployeeError()
 }
 
