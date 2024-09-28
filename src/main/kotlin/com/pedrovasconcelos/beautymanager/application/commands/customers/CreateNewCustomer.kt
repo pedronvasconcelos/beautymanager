@@ -16,6 +16,8 @@ class CreateNewCustomerHandler(private val centerRepository: CenterRepository) {
     fun handle(command: CreateNewCustomer): Either<BaseError, CreateNewCustomerResponse> = either {
         val center = centerRepository.getCenter(command.centerId).bind()
         val customer = createCustomer(command.name, command.centerId, command.email, command.phone)
+            .mapLeft { it as BaseError }
+            .bind()
         val updatedCenter = center.addCustomer(customer).bind()
         centerRepository.saveCenter(updatedCenter).bind()
         CreateNewCustomerResponse(
