@@ -29,8 +29,8 @@ class CenterRepositoryImpl(
         )
 
     override fun getCenter(id: UUID): Either<RepositoryError, Center> =
-        centerMongoRepository.findById(id).orElse(null)?.toDomain()?.right() ?: RepositoryError().left()
+        centerMongoRepository.findById(id.toString()).orElse(null)?.toDomain()?.right() ?: RepositoryError().left()
 }
 
 
-interface CenterMongoRepository : MongoRepository<CenterDocument, UUID>
+interface CenterMongoRepository : MongoRepository<CenterDocument, String>

@@ -4,10 +4,11 @@ import CenterDocument
 import EmployeeEmbeddedDocument
 import com.pedrovasconcelos.beautymanager.domain.centers.Center
 import com.pedrovasconcelos.beautymanager.domain.centers.Employee
+import java.util.*
 
 fun Center.toDocument(): CenterDocument =
     CenterDocument(
-        id = id,
+        id = id.toString(),
         name = name,
         email = email,
         active = active,
@@ -16,7 +17,7 @@ fun Center.toDocument(): CenterDocument =
 
 fun CenterDocument.toDomain(): Center =
     Center(
-        id = id,
+        id = UUID.fromString(id),
         name = name,
         email = email,
         active = active,
@@ -25,18 +26,18 @@ fun CenterDocument.toDomain(): Center =
 
 fun Employee.toDocument(): EmployeeEmbeddedDocument =
     EmployeeEmbeddedDocument(
-        id = id,
+        id = id.toString(),
         name = name,
         role = role,
         active = active,
-        centerId = centerId
+        centerId = centerId.toString()
     )
 
 fun EmployeeEmbeddedDocument.toDomain(): Employee =
     Employee(
-        id = id,
+        id = UUID.fromString(id),
         name = name,
         role = role,
         active = active,
-        centerId = centerId
+        centerId = UUID.fromString(centerId)
     )

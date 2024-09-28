@@ -29,13 +29,9 @@ fun createCenter(name: String, email: String): Either<BaseError, Center> {
     }
 }
 
-
-
-
 fun Center.addEmployee(employee: Employee): Either<BaseError, Center> =
     if (employees.none { it.name == employee.name })
         Right(copy(employees = employees + employee))
     else Left(
         ValidationError("Employee already exists")
     )
-
