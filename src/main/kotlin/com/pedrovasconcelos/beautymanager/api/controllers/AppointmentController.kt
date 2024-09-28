@@ -29,9 +29,19 @@ class AppointmentController(
         )
     }
 
-    @PatchMapping("/{appointmentId}")
+    @PatchMapping("/{appointmentId}/complete")
     fun updateAppointment(@RequestBody request: CompleteAppointment): ResponseEntity<Any> {
         return completeAppointmentHandler.handler(
+            request
+        ).fold(
+            { error -> handleError(error) },
+            { customer -> ResponseEntity.ok(customer) }
+        )
+    }
+
+    @PatchMapping("/{appointmentId}/cancel")
+    fun cancelAppointment(@RequestBody request: CompleteAppointment): ResponseEntity<Any> {
+        return completeAppointmentHandler.cancelAppointment(
             request
         ).fold(
             { error -> handleError(error) },
