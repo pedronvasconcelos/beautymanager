@@ -5,6 +5,7 @@ import arrow.core.Either.Left
 import arrow.core.Either.Right
 import arrow.core.left
 import arrow.core.right
+import com.pedrovasconcelos.beautymanager.domain.customers.Customer
 import com.pedrovasconcelos.beautymanager.domain.shared.BaseError
 import com.pedrovasconcelos.beautymanager.domain.shared.ValidationError
 import java.util.UUID
@@ -13,7 +14,8 @@ data class Center (val id : UUID,
                    val active : Boolean,
                    val name : String,
                    val email : String,
-                   val employees : List<Employee> = emptyList()
+                   val employees : List<Employee> = emptyList(),
+                   val customers : List<Customer> = emptyList()
     )
 
 fun createCenter(name: String, email: String): Either<BaseError, Center> {
@@ -34,4 +36,11 @@ fun Center.addEmployee(employee: Employee): Either<BaseError, Center> =
         Right(copy(employees = employees + employee))
     else Left(
         ValidationError("Employee already exists")
+    )
+
+fun Center.addCustomer(customer: Customer): Either<BaseError, Center> =
+    if (customers.none { it.name == customer.name })
+        Right(copy(customers = customers + customer))
+    else Left(
+        ValidationError("Customer already exists")
     )

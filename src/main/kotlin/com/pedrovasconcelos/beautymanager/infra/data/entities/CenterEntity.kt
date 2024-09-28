@@ -8,15 +8,24 @@ data class CenterDocument(
     val name: String,
     val active: Boolean,
     val email: String,
-    val employees: List<EmployeeEmbeddedDocument> = emptyList()
+    val employees: List<EmployeeEmbeddedDocument> = emptyList(),
+    val customers: List<CustomerDocument> = emptyList()
 )
 
 
-@Document(collection = "employees")
 data class EmployeeEmbeddedDocument(
     val id: String,
     val name: String,
     val role: String,
     val active: Boolean,
     val centerId: String
+)
+
+data class CustomerDocument(
+    val id: String,
+    val name: String,
+    val centerId: String,
+    val active: Boolean,
+    val email: String?,
+    val phone: String?
 )
