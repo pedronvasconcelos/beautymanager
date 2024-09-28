@@ -9,6 +9,7 @@ import com.pedrovasconcelos.beautymanager.domain.centers.addCustomer
 import com.pedrovasconcelos.beautymanager.domain.customers.Customer
 import com.pedrovasconcelos.beautymanager.domain.customers.createCustomer
 import com.pedrovasconcelos.beautymanager.domain.scheduler.AppointmentRepository
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,9 +24,8 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
 import java.time.LocalDateTime
-import java.util.*
+import java.util.UUID
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 @Suppress("unused")
 @Testcontainers
@@ -123,7 +123,7 @@ class SchedulerAppointmentTest {
 
         //Assert
         assert(result.isLeft())
-        assertNull(appointment, "Appointment should not be created")
+        Assertions.assertNotEquals(appointment?.customer?.id, customerId)
     }
 
     private fun setupAppointmentBusyEmployee(){

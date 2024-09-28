@@ -28,19 +28,15 @@ class SchedulerAppointmentHandler(private val appointmentRepository: Appointment
         val customer = center.customers.find { it.id == command.customerId }
             ?: return Either.Left(NotFoundError("Customer not found"))
 
-        val available = appointmentRepository.checkAvailability(center.id,
-            employee.id,
-            command.start,
-            command.duration)
+        val appointment = createAppointment(customer, employee, center.id, command.start, command.duration, command.service)
+
+        val available = appointmentRepository.checkAvailability(appointment)
         if(!available) {
             return Either.Left(AppointmentNotAvailableError())
         }
-
-        val appointment = createAppointment(customer, employee, center.id, command.start, command.duration, command.service)
-
         val savedAppointment = appointmentRepository.saveAppointment(appointment)
         return savedAppointment.map {
-            CreateAppointmentResponse(it.id, it.start, it.estimatedDuration, it.status)
+            CreateAppointmentResponse(it.id, it.start, it.end, it.status)
         }
     }
 
@@ -58,7 +54,7 @@ data class CreateAppointment (
 data class CreateAppointmentResponse(
     val id: UUID,
     val start: LocalDateTime,
-    val estimatedDuration: Int,
+    val end: LocalDateTime,
     val status: AppointmentStatus
 )
 

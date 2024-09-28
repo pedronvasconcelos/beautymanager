@@ -10,13 +10,15 @@ data class Appointment(val id: UUID,
                        val employee: Employee,
                        val centerId: UUID,
                        val start: LocalDateTime,
-                       val estimatedDuration: Int,
+                       val end: LocalDateTime,
                        val service: String?,
                        val notes: String?,
                        val status: AppointmentStatus)
 
 fun createAppointment(customer: Customer, employee: Employee, centerId: UUID, start: LocalDateTime, duration: Int, service: String?) : Appointment {
-    return Appointment(UUID.randomUUID(), customer, employee, centerId, start, duration, service, null, AppointmentStatus.SCHEDULED)
+
+    val end = start.plusMinutes(duration.toLong())
+    return Appointment(UUID.randomUUID(), customer, employee, centerId, start, end, service, null, AppointmentStatus.SCHEDULED)
 }
 
 fun completeAppointment(appointment: Appointment) : Appointment {
