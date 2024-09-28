@@ -7,6 +7,7 @@ import com.pedrovasconcelos.beautymanager.domain.centers.Center
 import com.pedrovasconcelos.beautymanager.domain.centers.Employee
 import com.pedrovasconcelos.beautymanager.domain.customers.Customer
 import com.pedrovasconcelos.beautymanager.domain.shared.EmailAddress
+import com.pedrovasconcelos.beautymanager.domain.shared.PhoneNumber
 import java.util.*
 
 fun Center.toDocument(): CenterDocument =
@@ -54,7 +55,7 @@ fun Customer.toDocument(): CustomerDocument =
         centerId = centerId.toString(),
         active = active,
         email = email?.value,
-        phone = phone
+        phone = phone?.value
     )
 
 fun CustomerDocument.toDomain(): Customer =
@@ -64,5 +65,5 @@ fun CustomerDocument.toDomain(): Customer =
         centerId = UUID.fromString(centerId),
         active = active,
         email = email?.let { EmailAddress(it) },
-        phone = phone
+        phone = phone?.let { PhoneNumber(it) }
     )

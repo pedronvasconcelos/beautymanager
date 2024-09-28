@@ -1,9 +1,7 @@
 package com.pedrovasconcelos.beautymanager.domain.customers
 
-import arrow.core.Either
 import arrow.core.Either.*
 import arrow.core.getOrElse
-import arrow.core.right
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -30,7 +28,7 @@ class CustomerTest {
         assertThat(customer.centerId).isEqualTo(centerId)
         assertThat(customer.active).isTrue
         assertThat(customer.email?.value).isEqualTo(email)
-        assertThat(customer.phone).isEqualTo(phone)
+        assertThat(customer.phone?.value).isEqualTo(phone)
     }
 
     @Test
@@ -47,7 +45,7 @@ class CustomerTest {
         // Assert
         assertThat(result).isInstanceOf(Left::class.java)
         val error = (result as Left).value
-        assertThat(error).isNotNull();
+        assertThat(error).isNotNull()
     }
 
     @Test
@@ -64,7 +62,7 @@ class CustomerTest {
         // Assert
         assertThat(result).isInstanceOf(Left::class.java)
         val error = (result as Left).value
-        assertThat(error).isNotNull();
+        assertThat(error).isNotNull()
     }
 
     @Test
@@ -81,7 +79,7 @@ class CustomerTest {
         // Assert
         assertThat(result).isInstanceOf(Left::class.java)
         val error = (result as Left).value
-        assertThat(error).isNotNull();
+        assertThat(error).isNotNull()
     }
 
 
@@ -89,7 +87,7 @@ class CustomerTest {
     fun `updatePhone should return updated Customer when phone is valid`() {
         // Arrange
         val originalCustomer = createCustomer("Charlie", UUID.randomUUID(), "charlie@old.com", "7778889999").onRight { it }.getOrElse { throw RuntimeException("Test failed") }
-        val newPhone = "0001112222"
+        val newPhone = "1122265552"
 
         // Act
         val result = updatePhone(originalCustomer, newPhone)
@@ -97,7 +95,7 @@ class CustomerTest {
         // Assert
         assertThat(result).isInstanceOf(Right::class.java)
         val updatedCustomer = (result as Right<Customer>).value
-        assertThat(updatedCustomer.phone).isEqualTo(newPhone)
+        assertThat(updatedCustomer.phone?.value).isEqualTo(newPhone)
         assertThat(updatedCustomer.name).isEqualTo(originalCustomer.name)
         assertThat(updatedCustomer.email).isEqualTo(originalCustomer.email)
         assertThat(updatedCustomer.active).isEqualTo(originalCustomer.active)
