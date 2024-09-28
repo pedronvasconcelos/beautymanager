@@ -8,4 +8,5 @@ interface AppointmentRepository {
     fun saveAppointment(appointment: Appointment): Either<RepositoryError, Appointment>
     fun checkAvailability(appointment : Appointment):  Boolean
     fun getCenterAppointments(centerId: UUID): Either<RepositoryError,List<Appointment>>
+    fun getAppointment(appointmentId: UUID): Either<RepositoryError, Appointment>
 }

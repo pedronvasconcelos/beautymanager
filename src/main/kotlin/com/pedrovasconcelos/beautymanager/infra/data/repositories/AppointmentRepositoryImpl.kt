@@ -59,6 +59,15 @@ class AppointmentRepositoryImpl(
             onFailure = { RepositoryError().left() }
         )
 
+    override fun getAppointment(appointmentId: UUID): Either<RepositoryError, Appointment> =
+          runCatching { mongoRepository.findById(appointmentId.toString())}
+            .mapCatching { it.orElse(null)?.toDomain() }
+            .fold(
+                onSuccess = { it?.right() ?: RepositoryError().left() },
+                onFailure = { RepositoryError().left() }
+            )
+
+
 }
 
 interface AppointmentMongoRepository : MongoRepository<AppointmentDocument, String>
