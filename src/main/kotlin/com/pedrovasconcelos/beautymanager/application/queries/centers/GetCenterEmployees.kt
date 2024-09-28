@@ -1,11 +1,11 @@
 package com.pedrovasconcelos.beautymanager.application.queries.centers
 
-import EmployeeEmbeddedDocument
 import arrow.core.Either
 import arrow.core.flatMap
 import arrow.core.left
 import arrow.core.right
 import com.pedrovasconcelos.beautymanager.domain.shared.*
+import com.pedrovasconcelos.beautymanager.infra.data.entities.EmployeeEmbeddedDocument
 
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria

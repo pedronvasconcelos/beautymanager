@@ -1,13 +1,14 @@
 package com.pedrovasconcelos.beautymanager.infra.data.mappers
 
 import CenterDocument
-import CustomerDocument
-import EmployeeEmbeddedDocument
+
 import com.pedrovasconcelos.beautymanager.domain.centers.Center
 import com.pedrovasconcelos.beautymanager.domain.centers.Employee
 import com.pedrovasconcelos.beautymanager.domain.customers.Customer
 import com.pedrovasconcelos.beautymanager.domain.shared.EmailAddress
 import com.pedrovasconcelos.beautymanager.domain.shared.PhoneNumber
+import com.pedrovasconcelos.beautymanager.infra.data.entities.CustomerEmbedded
+import com.pedrovasconcelos.beautymanager.infra.data.entities.EmployeeEmbeddedDocument
 import java.util.*
 
 fun Center.toDocument(): CenterDocument =
@@ -48,8 +49,8 @@ fun EmployeeEmbeddedDocument.toDomain(): Employee =
         centerId = UUID.fromString(centerId)
     )
 
-fun Customer.toDocument(): CustomerDocument =
-    CustomerDocument(
+fun Customer.toDocument(): CustomerEmbedded =
+    CustomerEmbedded(
         id = id.toString(),
         name = name,
         centerId = centerId.toString(),
@@ -58,7 +59,7 @@ fun Customer.toDocument(): CustomerDocument =
         phone = phone?.value
     )
 
-fun CustomerDocument.toDomain(): Customer =
+fun CustomerEmbedded.toDomain(): Customer =
     Customer(
         id = UUID.fromString(id),
         name = name,

@@ -7,7 +7,7 @@ import java.util.*
 
 data class Appointment(val id: UUID,
                        val customer: Customer,
-                       val employe: Employee,
+                       val employee: Employee,
                        val centerId: UUID,
                        val start: LocalDateTime,
                        val estimatedDuration: Int,

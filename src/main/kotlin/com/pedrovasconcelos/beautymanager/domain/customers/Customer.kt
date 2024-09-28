@@ -16,7 +16,7 @@ data class Customer(
     val phone: PhoneNumber?
 )
 
-fun createCustomer(name: String, centerId: UUID, email: String?, phone: String?): Either<BaseError, Customer> {
+fun createCustomer(name: String, centerId: UUID, email: String? = null, phone: String?=null): Either<BaseError, Customer> {
     if (name.isBlank()) {
         return Either.Left(ValidationError("Invalid name"))
     }

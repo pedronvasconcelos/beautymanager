@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.pedrovasconcelos.beautymanager.domain.scheduler.Appointment
 import com.pedrovasconcelos.beautymanager.domain.scheduler.AppointmentRepository
 import com.pedrovasconcelos.beautymanager.domain.shared.RepositoryError
+import com.pedrovasconcelos.beautymanager.infra.data.entities.AppointmentDocument
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
@@ -19,6 +20,10 @@ class AppointmentRepositoryImpl  : AppointmentRepository {
         TODO("Not yet implemented")
     }
 
+    override fun getCenterAppointments(centerId: UUID): Either<RepositoryError, List<Appointment>> {
+        TODO("Not yet implemented")
+    }
+
 }
 
-interface AppointmentMongoRepository : MongoRepository<Any, String>
+interface AppointmentMongoRepository : MongoRepository<AppointmentDocument, String>

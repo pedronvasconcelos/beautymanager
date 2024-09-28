@@ -8,4 +8,5 @@ import java.util.*
 interface AppointmentRepository {
     fun saveAppointment(appointment: Appointment): Either<RepositoryError, Appointment>
     fun checkAvailability(centerId: UUID, employeeId: UUID, start: LocalDateTime, duration: Int):  Boolean
+    fun getCenterAppointments(centerId: UUID): Either<RepositoryError,List<Appointment>>
 }
