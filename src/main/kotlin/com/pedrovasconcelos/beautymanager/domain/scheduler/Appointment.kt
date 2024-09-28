@@ -1,20 +1,22 @@
 package com.pedrovasconcelos.beautymanager.domain.scheduler
 
+import com.pedrovasconcelos.beautymanager.domain.centers.Employee
+import com.pedrovasconcelos.beautymanager.domain.customers.Customer
 import java.time.LocalDateTime
 import java.util.*
 
 data class Appointment(val id: UUID,
-                       val customerId: UUID,
-                       val employeeId: UUID,
+                       val customer: Customer,
+                       val employe: Employee,
                        val centerId: UUID,
                        val start: LocalDateTime,
-                       val end: LocalDateTime,
+                       val estimatedDuration: Int,
                        val service: String?,
                        val notes: String?,
                        val status: AppointmentStatus)
 
-fun createAppointment(customerId: UUID, employeeId: UUID, centerId: UUID, start: LocalDateTime, end: LocalDateTime, service: String?) : Appointment {
-    return Appointment(UUID.randomUUID(), customerId, employeeId, centerId, start, end, service, null, AppointmentStatus.SCHEDULED)
+fun createAppointment(customer: Customer, employee: Employee, centerId: UUID, start: LocalDateTime, duration: Int, service: String?) : Appointment {
+    return Appointment(UUID.randomUUID(), customer, employee, centerId, start, duration, service, null, AppointmentStatus.SCHEDULED)
 }
 
 fun completeAppointment(appointment: Appointment) : Appointment {
@@ -22,24 +24,12 @@ fun completeAppointment(appointment: Appointment) : Appointment {
 }
 
 
-fun updateNotes(appointment: Appointment, notes: String) : Appointment {
-    return appointment.copy(notes = notes)
-}
-
 fun cancelAppointment(appointment: Appointment) : Appointment {
     return appointment.copy(status = AppointmentStatus.CANCELLED)
 }
 
-fun updateAppointment(appointment: Appointment, start: LocalDateTime, end: LocalDateTime, service: String?) : Appointment {
-    return appointment.copy(start = start, end = end, service = service)
-}
 
-fun updateEmployee(appointment: Appointment, employeeId: UUID) : Appointment {
-    return appointment.copy(employeeId = employeeId)
-}
-fun updateCustomer(appointment: Appointment, customerId: UUID) : Appointment {
-    return appointment.copy(customerId = customerId)
-}
+
 enum class AppointmentStatus{
     SCHEDULED,
     CANCELLED,

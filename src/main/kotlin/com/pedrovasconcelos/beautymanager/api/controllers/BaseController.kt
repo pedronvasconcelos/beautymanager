@@ -9,6 +9,7 @@ abstract class BaseController {
     protected fun handleError(error: BaseError): ResponseEntity<Any> {
         return when (error) {
             is ValidationError -> ResponseEntity.badRequest().body(from(error))
+            is BusinessError -> ResponseEntity.badRequest().body(from(error))
             is RepositoryError -> ResponseEntity.status(500).body(from(error))
             is NotFoundError -> ResponseEntity.notFound().build()
             is NoContentResponse -> ResponseEntity.noContent().build()

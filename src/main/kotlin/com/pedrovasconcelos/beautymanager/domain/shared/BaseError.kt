@@ -16,7 +16,8 @@ data class NotFoundError(override val message : String) : BaseError() {
 
 data class NoContentResponse(override val message : String) : BaseError() {
 }
-
+open class BusinessError(override val message : String) : BaseError() {
+}
 fun <T> T?.toEither(error: BaseError): Either<BaseError, T> =
     this?.right() ?: error.left()
 
