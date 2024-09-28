@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_APPLICATION_NAME=beautymanager
+      - SPRING_DATA_MONGODB_URI=mongodb://root:password@mongodb:27017
+      - SPRING_DATA_MONGODB_DATABASE=beauty_manager
+      - SPRINGDOC_API-DOCS_PATH=/api-docs
+      - SPRINGDOC_SWAGGER-UI_PATH=/swagger-ui.html
+    depends_on:
+      - mongodb
+    networks:
+      - beauty-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - beauty-network
+
+networks:
+  beauty-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
