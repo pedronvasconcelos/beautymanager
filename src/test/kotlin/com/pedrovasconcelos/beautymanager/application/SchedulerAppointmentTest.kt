@@ -91,7 +91,8 @@ class SchedulerAppointmentTest {
             employeeId = employeeId,
             start = LocalDateTime.of(2024, 6, 1, 10, 0),
             duration = 60,
-            service = "Haircut"
+            service = "Haircut",
+            price = 30.0.toBigDecimal()
         )
 
         //Act
@@ -114,7 +115,8 @@ class SchedulerAppointmentTest {
             employeeId = employeeId,
             start = LocalDateTime.of(2024, 6, 1, 10, 59),
             duration = 60,
-            service = "Haircut"
+            service = "Haircut",
+            price = 30.0.toBigDecimal()
         )
 
         //Act
@@ -137,7 +139,8 @@ class SchedulerAppointmentTest {
             employeeId = employeeId,
             start = LocalDateTime.of(2024, 6, 1, 10, 0),
             duration = 60,
-            service = "Haircut"
+            service = "Haircut",
+            price = 30.0.toBigDecimal()
         )
        schedulerAppointmentHandler.handler(anotherCommand)
     }

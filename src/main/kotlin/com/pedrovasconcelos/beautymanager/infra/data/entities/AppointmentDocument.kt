@@ -1,6 +1,7 @@
 package com.pedrovasconcelos.beautymanager.infra.data.entities
 
 import org.springframework.data.mongodb.core.mapping.Document
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Document(collection = "appointments")
@@ -13,4 +14,5 @@ data class AppointmentDocument (val id : String,
                                 val service : String?,
                                 val notes : String?,
                                 val status : String,
+                                val price : BigDecimal,
 )

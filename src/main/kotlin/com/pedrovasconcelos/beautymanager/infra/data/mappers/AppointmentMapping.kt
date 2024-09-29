@@ -14,7 +14,8 @@ fun Appointment.toDocument(): AppointmentDocument =
         end= end,
         service = service,
         notes = notes,
-        status = status.name
+        status = status.name,
+        price = price
     )
 
 fun AppointmentDocument.toDomain(): Appointment =

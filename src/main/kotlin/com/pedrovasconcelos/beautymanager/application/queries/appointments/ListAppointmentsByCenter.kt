@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -96,7 +97,8 @@ data class AppointmentResponse(
     val start: String,
     val end: String,
     val status: String,
-    val service: String?
+    val service: String?,
+    val price: BigDecimal
 )
 
 fun AppointmentDocument.toAppointmentResponse() = AppointmentResponse(
@@ -109,7 +111,8 @@ fun AppointmentDocument.toAppointmentResponse() = AppointmentResponse(
     start = this.start.toString(),
     end = this.end.toString(),
     status = this.status,
-    service = this.service
+    service = this.service,
+    price = this.price
 )
 
  fun LocalDateTime.formatDate(): String {

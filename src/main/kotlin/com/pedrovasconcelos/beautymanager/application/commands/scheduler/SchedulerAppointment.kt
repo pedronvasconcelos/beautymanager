@@ -9,6 +9,7 @@ import com.pedrovasconcelos.beautymanager.domain.shared.BaseError
 import com.pedrovasconcelos.beautymanager.domain.shared.BusinessError
 import com.pedrovasconcelos.beautymanager.domain.shared.NotFoundError
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
 
@@ -28,7 +29,7 @@ class SchedulerAppointmentHandler(private val appointmentRepository: Appointment
         val customer = center.customers.find { it.id == command.customerId }
             ?: return Either.Left(NotFoundError("Customer not found"))
 
-        val appointment = createAppointment(customer, employee, center.id, command.start, command.duration, command.service)
+        val appointment = createAppointment(customer, employee, center.id, command.start, command.duration, command.service, command.price)
 
         val available = appointmentRepository.checkAvailability(appointment)
         if(!available) {
@@ -49,6 +50,7 @@ data class CreateAppointment (
     val start: LocalDateTime,
     val duration: Int,
     val service: String?,
+    val price: BigDecimal?
 )
 
 data class CreateAppointmentResponse(
