@@ -4,6 +4,7 @@ import arrow.core.Either
 import arrow.core.flatMap
 import arrow.core.left
 import arrow.core.right
+import com.pedrovasconcelos.beautymanager.application.queries.shared.PaginatedResponse
 import com.pedrovasconcelos.beautymanager.domain.shared.*
 import com.pedrovasconcelos.beautymanager.infra.data.entities.EmployeeEmbeddedDocument
 

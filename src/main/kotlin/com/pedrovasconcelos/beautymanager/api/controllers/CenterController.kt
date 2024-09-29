@@ -48,7 +48,7 @@ class CenterController(
 
     @GetMapping("/{centerId}/employees")
     fun getCenterEmployees(
-        @PathVariable centerId: String,
+        @RequestParam centerId: String,
         @RequestParam(required = false, defaultValue = "1") page: Int,
         @RequestParam(required = false, defaultValue = "10") size: Int
     ): ResponseEntity<Any> {

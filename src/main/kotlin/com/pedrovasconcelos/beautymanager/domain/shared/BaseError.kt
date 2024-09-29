@@ -25,11 +25,3 @@ fun <T> List<T>.toEitherIfNotEmpty(error: BaseError): Either<BaseError, List<T>>
     if (this.isNotEmpty()) this.right() else error.left()
 
 
-class PaginatedResponse<T>(
-    val data: List<T>,
-    val page: Int,
-    val size: Int,
-    val total: Int
-) {
-    val totalPages: Int = if (size == 0) 0 else (total + size - 1) / size
-}
